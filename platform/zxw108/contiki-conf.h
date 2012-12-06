@@ -74,7 +74,7 @@
 /* TX routine does automatic cca and optional backoff */
 #define RDC_CONF_HARDWARE_CSMA                  0
 /* RDC debug with LED */
-#define RDC_CONF_DEBUG_LED                      1
+#define RDC_CONF_DEBUG_LED                      0 //1
 /* Channel check rate (per second) */
 #define NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE    8
 /* Use ACK for optimization (LPP, XMAC) */
@@ -122,19 +122,27 @@
 
 #define NETSTACK_CONF_FRAMER  framer_802154
 #define NETSTACK_CONF_RADIO   stm32w_radio_driver 
-
-#if UIP_CONF_IPV6
 /* Addresses, Sizes and Interfaces */
 /* 8-byte addresses here, 2 otherwise */
 #define RIMEADDR_CONF_SIZE                   8
 #define UIP_CONF_LL_802154                   1
 /* Set to 0 for non ethernet links */
 #define UIP_CONF_LLH_LEN                     0
+
+
+#if UIP_CONF_IPV6
+
 #define UIP_CONF_NETIF_MAX_ADDRESSES         3
 
 /* TCP, UDP, ICMP */
+#ifndef UIP_CONF_TCP
 #define UIP_CONF_TCP                         1 
-#define UIP_CONF_UDP                         1
+#endif
+#ifndef UIP_CONF_UDP
+#define UIP_CONF_UDP                         1 
+#endif
+//#define UIP_CONF_UDP_CONNS		     1 
+//#define UIP_CONF_TCP_CONNS		     2
 #define UIP_CONF_UDP_CHECKSUMS               1
 
 /* ND and Routing */
@@ -169,7 +177,7 @@
 #define UIP_CONF_IPV6_QUEUE_PKT              0
 #define UIP_CONF_IPV6_CHECKS                 1
 #define UIP_CONF_IPV6_REASSEMBLY             0
-#define UIP_CONF_RECEIVE_WINDOW          60
+#define UIP_CONF_RECEIVE_WINDOW              60
 
 /* 6lowpan */
 #define SICSLOWPAN_CONF_COMPRESSION          SICSLOWPAN_COMPRESSION_HC06

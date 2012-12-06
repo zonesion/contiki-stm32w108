@@ -80,8 +80,9 @@ typedef unsigned long rtimer_clock_t;
 #define RTIMER_CLOCK_LT(a,b)     ((signed short)((a)-(b)) < 0)
 
 /* LEDs ports MB8xxx */
+
 #define LEDS_CONF_GREEN         LED_D1
-#define LEDS_CONF_YELLOW        LED_D3
+#define LEDS_CONF_YELLOW        LED_D2 //LED_D3
 #define LEDS_CONF_RED           LED_D3
 
 #define UIP_ARCH_ADD32           1

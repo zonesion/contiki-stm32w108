@@ -97,7 +97,8 @@ leds_arch_get(void)
 {
     return (halGpioGetPxOUT(LEDS_CONF_GREEN) ? 0 : LEDS_GREEN)
         | (halGpioGetPxOUT(LEDS_CONF_YELLOW) ? 0 : LEDS_YELLOW)
-        | (halGpioGetPxOUT(LEDS_CONF_RED) ? 0 : LEDS_RED);
+        | (halGpioGetPxOUT(LEDS_CONF_RED) ? 0 : LEDS_RED)
+	| (halGpioGetPxOUT(LED_D4) ? 0 : 0x08);
 }
 /*---------------------------------------------------------------------------*/
 void
@@ -106,5 +107,6 @@ leds_arch_set(unsigned char leds)
   halGpioSet(LEDS_CONF_GREEN, !(leds & LEDS_GREEN));
   halGpioSet(LEDS_CONF_YELLOW, !(leds & LEDS_YELLOW));
   halGpioSet(LEDS_CONF_RED, !(leds & LEDS_RED));
+  halGpioSet(LED_D4, !(leds & 0x08));
 }
 /*---------------------------------------------------------------------------*/

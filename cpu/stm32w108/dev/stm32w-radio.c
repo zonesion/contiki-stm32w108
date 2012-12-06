@@ -60,7 +60,7 @@
 #define DEBUG 0
 
 #include "dev/leds.h"
-#define LED_ACTIVITY 0
+#define LED_ACTIVITY  1 
 
 #ifdef ST_CONF_RADIO_AUTOACK
 #define ST_RADIO_AUTOACK ST_CONF_RADIO_AUTOACK

@@ -1,10 +1,11 @@
 
-ARCH= irq.c sensors.c acc-sensor.c button-sensor.c temperature-sensor.c mems.c slip.c slip-arch.c
+ARCH= irq.c sensors.c acc-sensor.c button-sensor.c temperature-sensor.c mems.c slip.c slip-arch.c board-zx.c
 
+BOARD_HEADER=board-zx.h
 
 CONTIKI_TARGET_DIRS = . dev
 ifndef CONTIKI_TARGET_MAIN
-CONTIKI_TARGET_MAIN = contiki-main.c led.c button.c board.c board-mbxxx.c
+CONTIKI_TARGET_MAIN = contiki-main.c led.c button.c board-mbxxx.c
 endif
 
 

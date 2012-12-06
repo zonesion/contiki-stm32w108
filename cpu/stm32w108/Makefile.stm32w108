@@ -57,6 +57,12 @@ else
 endif
 #									`$(CC) -print-file-name=thumb2/libc.a` `$(CC) -print-file-name=thumb2/libgcc.a`
 
+ifndef BOARD_HEADER
+CFLAGS += -D BOARD_HEADER=\"board.h\"
+else
+CFLAGS += -D BOARD_HEADER=\"$(BOARD_HEADER)\"
+endif
+
 ### Compiler definitions
 ifdef IAR
 CC       = iccarm
@@ -68,7 +74,7 @@ STRIP    = strip
 ifndef DEBUG
 OPTI = -Ohz --no_unroll
 endif
-CFLAGSNO = --endian=little --cpu=Cortex-M3 -e --diag_suppress Pa050 -D BOARD_HEADER=\"board.h\" \
+CFLAGSNO = --endian=little --cpu=Cortex-M3 -e --diag_suppress Pa050 \
 			-D BOARD_MB851 -D "PLATFORM_HEADER=\"hal/micro/cortexm3/compiler/iar.h\""  -D CORTEXM3 \
 			-D CORTEXM3_STM32W108 -D PHY_STM32W108XX -D DISABLE_WATCHDOG -D ENABLE_ADC_EXTENDED_RANGE_BROKEN \
 			-D __SOURCEFILE__=\"$*.c\" -lC $(OBJECTDIR) \
@@ -98,11 +104,12 @@ OPTI = -Os -ffunction-sections
 endif
 
 CFLAGSNO = -mthumb -mcpu=cortex-m3 -D "PLATFORM_HEADER=\"hal/micro/cortexm3/compiler/gnu.h\"" \
-			-D BOARD_HEADER=\"board.h\" -g -Wall -Wno-strict-aliasing -mlittle-endian \
+			-Wall -Wno-strict-aliasing -mlittle-endian \
 			-D BOARD_MB851   -D CORTEXM3 -D CORTEXM3_STM32W108 -D PHY_STM32W108XX -D DISABLE_WATCHDOG -D ENABLE_ADC_EXTENDED_RANGE_BROKEN \
 			-D __SOURCEFILE__=\"$*.c\"
+
 CFLAGS  += $(CFLAGSNO) $(OPTI)
-ASFLAGS = -mthumb -mcpu=cortex-m3 -c -g -Wall -Os -ffunction-sections \
+ASFLAGS = -mthumb -mcpu=cortex-m3 -c  -Wall -Os -ffunction-sections \
 	    -mlittle-endian -fshort-enums -x assembler-with-cpp -Wa,-EL
 LDFLAGS += -mcpu=cortex-m3 \
 	    -mthumb  \
