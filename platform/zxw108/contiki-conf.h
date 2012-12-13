@@ -101,7 +101,9 @@
 
 
 #if UIP_CONF_IPV6
+#ifndef NETSTACK_CONF_NETWORK
 #define NETSTACK_CONF_NETWORK sicslowpan_driver
+#endif
 #else
 #define NETSTACK_CONF_NETWORK rime_driver
 #endif
@@ -119,8 +121,9 @@
 #ifndef NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE
 #define NETSTACK_CONF_RDC_CHANNEL_CHECK_RATE 8
 #endif
-
+#ifndef NETSTACK_CONF_FRAMER
 #define NETSTACK_CONF_FRAMER  framer_802154
+#endif
 #define NETSTACK_CONF_RADIO   stm32w_radio_driver 
 /* Addresses, Sizes and Interfaces */
 /* 8-byte addresses here, 2 otherwise */
@@ -173,7 +176,9 @@
 #endif
 
 /* uIP */
+#ifndef UIP_CONF_UBFFER_SIZE   
 #define UIP_CONF_BUFFER_SIZE                 130
+#endif
 #define UIP_CONF_IPV6_QUEUE_PKT              0
 #define UIP_CONF_IPV6_CHECKS                 1
 #define UIP_CONF_IPV6_REASSEMBLY             0
